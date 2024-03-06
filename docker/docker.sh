@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo "Intstalling docker"
-sudo apt update && sudo apt install docker.io
+sudo apt update && sudo apt install -y docker.io
+
 
 echo "cloning your site project" 
 git clone git@github.com:wiverson/maven-site-docs-example.git
