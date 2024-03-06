@@ -1,0 +1,42 @@
+#- name: debugging
+#  hosts: webservers
+#  tasks:
+#  - name: debugging visuel   
+#    ansible.builtin.shell:
+#      cmd: whoami
+
+
+- name: nginx installed
+  hosts: webservers
+  become: yes
+  tasks:
+  - name: latest nginx installed
+    command: 
+      cmd: apt install -y nginx
+
+- name: copy website to nodes
+  hosts: webservers
+  become: yes
+  tasks:
+  - name: Copy content of directory 'files'
+    copy:
+      src: "files/site.node1/"    # note the '/' <-- !!!
+      dest: /var/www/html
+
+- name: copy indexes to nodes
+  hosts: node1
+  become: yes
+  tasks:
+  - name: Copy content of directory 'files'
+    copy:
+      src: files/site.node1/index.html    # note the '/' <-- !!!
+      dest: /var/www/html
+
+- name: copy indexes to nodes
+  hosts: node2
+  become: yes
+  tasks:
+  - name: Copy content of directory 'files'
+    copy:
+      src: files/site.node2/index.html    # note the '/' <-- !!!
+      dest: /var/www/html
