@@ -1,0 +1,35 @@
+version: '3.3'
+services:
+
+  master:
+    image: master
+    container_name: dockermaster
+    restart: always
+
+    ports:
+    - 9000:80
+
+
+  web1: 
+    image: web
+    container_name: webworker1
+    restart: always
+
+    ports:
+    - 9001:80
+    
+    volumes:
+    - ./volume_worker1:/usr/share/nginx/html
+
+
+  web2: 
+    image: web
+    container_name: webworker2
+    restart: always
+
+    ports:
+    - 9002:80
+    
+    volumes:
+    - ./volume_worker2:/usr/share/nginx/html
+

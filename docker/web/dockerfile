@@ -1,0 +1,2 @@
+FROM nginx
+COPY maven-site-docs-example/target/site/ /usr/share/nginx/html/
