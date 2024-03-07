@@ -1,7 +1,7 @@
 #!/bin/bash
 
 read -p "Please enter the IP address of this machine : " ip_address
-cp templates/load_balancer.conf master/load_balancer.conf
+cp templates/load-balancer.conf master/load-balancer.conf
 sed -i "s/IP_ADDRESS_TO_REPLACE/$ip_address/g" master/load-balancer.conf
 
 echo "-------------------------Intstalling docker-------------------------"
