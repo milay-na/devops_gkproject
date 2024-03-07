@@ -1,6 +1,7 @@
 #!/bin/bash
 
 read -p "Please enter the IP address of this machine : " ip_address
+cp templates/load_balancer.conf master/load_balancer.conf
 sed -i "s/IP_ADDRESS_TO_REPLACE/$ip_address/g" master/load-balancer.conf
 
 echo "-------------------------Intstalling docker-------------------------"
@@ -10,7 +11,7 @@ echo "-----------------------cloning your site project------------------"
 git clone https://github.com/wiverson/maven-site-docs-example.git
 
 echo "-------------------------Installing maven-----------------------"
-apt install -y openjdk-17* maven
+sudo apt install -y openjdk-17* maven
 
 echo "------------------------Building maven project------------------"
 cd maven-site-docs-example
@@ -27,13 +28,13 @@ mkdir volume_worker2
 
 
 echo "-------------------Building the master------------------------------"
-docker build -t master master 
+sudo docker build -t master master 
 
 echo "---------------------Building the workers------------------------------"
-docker build -t web -f web/dockerfile .
+sudo docker build -t web -f web/dockerfile .
 
 echo "--------------------docker composing---------------------------------"
-docker-compose up -d
+sudo docker-compose up -d
 
 
 #---Part for testing --------------------------------------------------------------
